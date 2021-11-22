@@ -1,0 +1,45 @@
+name: DangerFlutterLint
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup repository
+        uses: actions/checkout@v2
+      
+      - name: setup Flutter
+        uses: subosito/flutter-action@v1.5.3
+        with:
+          flutter-version: '2.5.3'
+          channel: 'stable'
+
+      - name: pub get
+        run: flutter pub get
+        
+      - name: flutter analyze
+        run: flutter analyze > flutter_analyze_report.txt
+        
+      - name: setup ruby
+        if: ${{ failure() }}
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+          
+      - name: bundle install
+        run: |
+          gem insall bundler
+          bundle install
+
+      - name: Run Danger
+        uses: MeilCli/danger-action@v5.0.1
+        with:
+          plugins_file: "Gemfile"
+          install_path: "vendor/bundle"
+          danger_file: "Dangerfile"
+          danger_id: "danger-pr"
