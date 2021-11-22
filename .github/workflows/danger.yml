@@ -35,9 +35,16 @@ jobs:
         if: ${{ failure() }}
         uses: MeilCli/danger-action@v5.0.1
         with:
+<<<<<<< HEAD
           plugins_file: Gemfile
           install_path: vendor/bundle
           danger_file: Dangerfile
           danger_id: danger-pr
+=======
+          plugins_file: "Gemfile"
+          install_path: "vendor/bundle"
+          danger_file: "Dangerfile"
+          danger_id: "danger-pr"
+>>>>>>> 44f5358 (Update danger.yml)
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_TOKEN }}
