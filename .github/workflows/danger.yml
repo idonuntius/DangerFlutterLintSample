@@ -27,15 +27,16 @@ jobs:
         
       - name: setup ruby
         if: always()
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.7'
+        uses: ruby/setup-ruby@v1
+          with:
+            ruby-version: 2.7
+            bundler-cache: true
           
-      - name: bundle install
-        if: always()
-        run: |
-          gem insall bundler
-          bundle install
+      # - name: bundle install
+      #   if: always()
+      #   run: |
+      #     sudo gem insall bundler
+      #     bundle install
 
       - name: Run Danger
         uses: MeilCli/danger-action@v5.0.1
