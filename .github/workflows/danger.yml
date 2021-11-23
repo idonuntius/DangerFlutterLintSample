@@ -26,7 +26,7 @@ jobs:
         run: flutter analyze > flutter_analyze_report.txt
         
       - name: setup ruby
-        if: failure()
+        if: always()
         uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.7'
