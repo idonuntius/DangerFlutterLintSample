@@ -8,6 +8,12 @@ class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container();
+    return Container(
+      child: _buildTest(),
+    );
+  }
+
+  Widget _buildTest() {
+    return Text('test');
   }
 }
